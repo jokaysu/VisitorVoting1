@@ -1,0 +1,33 @@
+CS343 A4 Q1b
+
+**********************************************************************************
+
+i.
+
+For the question b, I commented all the calls to Printer and get the result below.
+
+% make vote KIND=MC
+
+% /usr/bin/time -f "%Uu %Ss %Er" ./vote 10 2 500000 1218
+12.46u 0.01s 0:12.44r
+
+% make vote KIND=SEM
+
+% /usr/bin/time -f "%Uu %Ss %Er" ./vote 10 2 500000 1218
+13.42u 0.04s 0:13.47r
+
+% make vote KIND=BAR
+
+% /usr/bin/time -f "%Uu %Ss %Er" ./vote 10 2 500000 1218
+10.89u 0.02s 0:10.89r
+
+**********************************************************************************
+
+ii.
+
+As we can see above, uBarrier is the fastest one. Because when it finishes the 
+group, it always implicitly calls all the waiting members together.
+
+The uCondLock version is slightly faster than the uSemaphore version. Because 
+uCondLock a mechanism to call broadcast() all the waiting members, while 
+uSemaphore needs to call the waiting members one by one.
